@@ -1,7 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Select } from './Components';
-import { changeType, changeDistance, addExcercise, addCombo, addComboExcercise, changeDistanceCombo, changeTypeCombo } from '../redux/actions';
+import { 
+	changeType, 
+	changeDistance, 
+	addExcercise, 
+	addCombo, 
+	addComboExcercise, 
+	changeDistanceCombo, 
+	changeTypeCombo,
+	deleteExcercise,
+	deleteComboExcercise,
+} from '../redux/actions';
 
 class Mainpart extends React.Component {
 	constructor(props) {
@@ -43,7 +53,7 @@ class Mainpart extends React.Component {
 		this.props.changeDistanceCombo(id, event.target.name, event.target.value);
 		this.forceUpdate();
 	}
-	changeTypeCombo(id, event){
+	changeTypeCombo(id, event) {
 		console.log(event.target.value);
 		console.log(event.target.name);
 		console.log(id);
@@ -56,8 +66,17 @@ class Mainpart extends React.Component {
 			<li key={item.key}>
 				<input name={item.key.toString()} type="text" pattern="[0-9]*" onInput={this.changeDistanceCombo.bind(this, id)} />
 				<Select num={item.key.toString()} value={item.option} handleChange={this.changeTypeCombo.bind(this, id)} />
+				<button onClick={this.deleteComboExcercise.bind(this, id, item.key)}>X</button>
 			</li>
 		);
+	}
+	deleteComboExcercise(id, key){
+		this.props.deleteComboExcercise(id, key);
+		this.forceUpdate();
+	}
+	deleteExcercise(id){
+		this.props.deleteExcercise(id, 1);
+		this.forceUpdate();
 	}
 	createInputField(item) {
 		console.log(item);
@@ -66,6 +85,7 @@ class Mainpart extends React.Component {
 				<ul>
 					{item.data.map(this.createInputFieldCombo.bind(this, item.key))}
 					<button onClick={this.addComboExcercise.bind(this, item.key)}>+</button>
+					<button onClick={this.deleteExcercise.bind(this, item.key)}>X</button>
 				</ul>
 			)
 		}
@@ -73,6 +93,7 @@ class Mainpart extends React.Component {
 			<li key={item.key}>
 				<input name={item.key.toString()} type="text" pattern="[0-9]*" onInput={this.handleNum.bind(this)} />
 				<Select num={item.key.toString()} value={item.option} handleChange={this.handleChange} />
+				<button onClick={this.deleteExcercise.bind(this, item.key)}>X</button> 
 			</li>
 		);
 	}
@@ -100,6 +121,8 @@ const mapDispatchToProps = {
 	addCombo,
 	addComboExcercise,
 	changeDistanceCombo,
-	changeTypeCombo
+	changeTypeCombo,
+	deleteExcercise,
+	deleteComboExcercise,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Mainpart);

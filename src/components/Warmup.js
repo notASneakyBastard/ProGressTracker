@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Select } from './Components';
-import { changeType, changeDistance, addExcercise } from '../redux/actions';
+import { changeType, changeDistance, addExcercise, deleteExcercise } from '../redux/actions';
 import { throwStatement } from '@babel/types';
 
 class Warmup extends React.Component {
@@ -32,12 +32,17 @@ class Warmup extends React.Component {
 		this.props.addExcercise(0);
 		this.forceUpdate();
 	}
+	deleteExcercise(id){
+		this.props.deleteExcercise(id, 0);
+		this.forceUpdate();
+	}
 	createInputField(item) {
 		console.log(item)
 		return (
 			<li key={item.key}>
 				<input name={item.key.toString()} type="text" pattern="[0-9]*" onInput={this.handleNum.bind(this)} />
 				<Select num={item.key.toString()} value={item.option} handleChange={this.handleChange} />
+				<button onClick={this.deleteExcercise.bind(this, item.key)}>X</button> 
 			</li>
 		);
 	}
@@ -60,6 +65,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
 	changeDistance,
 	changeType,
-	addExcercise
+	addExcercise,
+	deleteExcercise,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Warmup);
