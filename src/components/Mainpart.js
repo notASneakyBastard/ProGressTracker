@@ -11,7 +11,8 @@ import {
 	changeTypeCombo,
 	deleteExcercise,
 	deleteComboExcercise,
-	changeMultiplierCombo
+	changeMultiplierCombo,
+	changeExcerciseMulti
 } from '../redux/actions';
 
 class Mainpart extends React.Component {
@@ -19,6 +20,7 @@ class Mainpart extends React.Component {
 		super(props);
 		this.state = {
 			combos: 1,
+			excercises: 1
 		}
 		this.createInputField = this.createInputField.bind(this);
 		this.addField = this.addField.bind(this);
@@ -39,7 +41,11 @@ class Mainpart extends React.Component {
 		this.forceUpdate();
 	}
 	addField() {
-		this.props.addExcercise(1);
+		let { excercises } = this.state
+		this.props.addExcercise(1, excercises);
+		this.setState({
+			excercises: excercises + 1,
+		})
 	}
 	addComboExcercise(key) {
 		this.props.addComboExcercise(key);
@@ -66,10 +72,12 @@ class Mainpart extends React.Component {
 	createInputFieldCombo(id, item) {
 		console.log(item, id);
 		return (
-			<li key={item.key}>
+			<li key={item.key} className="excercise inCombo">
+				<h4>Excercise #{item.excerciseID}</h4>
 				<input name={item.key.toString()} type="text" pattern="[0-9]*" onInput={this.changeDistanceCombo.bind(this, id)} />
 				<Select num={item.key.toString()} value={item.option} handleChange={this.changeTypeCombo.bind(this, id)} />
-				<button onClick={this.deleteComboExcercise.bind(this, id, item.key)}>X</button>
+				<br />
+				<button className="delete" onClick={this.deleteComboExcercise.bind(this, id, item.key)}>Delete</button>
 			</li>
 		);
 	}
@@ -82,6 +90,9 @@ class Mainpart extends React.Component {
 	deleteExcercise(id) {
 		this.props.deleteExcercise(id, 1);
 	}
+	changeExcerciseMulti(id, event){
+		this.props.changeExcerciseMulti(id, event.target.value);
+	}
 	createInputField(item) {
 		console.log(item);
 		if (item.option === 'combo') {
@@ -93,16 +104,21 @@ class Mainpart extends React.Component {
 						Times performed:
 						<input name={item.key.toString()} defaultValue={1} type="text" pattern="[0-9]*" onInput={this.changeMultiplierCombo.bind(this, item.key)} />
 					</div>
-					<button onClick={this.addComboExcercise.bind(this, item.key)}>+</button>
-					<button onClick={this.deleteExcercise.bind(this, item.key)}>X</button>
+					<button className="addExcercise" onClick={this.addComboExcercise.bind(this, item.key)}>Add Excercise</button>
+					<button className="delete" onClick={this.deleteExcercise.bind(this, item.key)}>Delete Combo</button>
 				</ul>
 			)
 		}
 		return (
 			<li key={item.key} className="excercise">
-				<input name={item.key.toString()} type="text" pattern="[0-9]*" onInput={this.handleNum.bind(this)} />
+				<h4>Excercise #{item.excerciseID}</h4>
+				<input name={item.key.toString()} type="text" pattern="[0-9]*" className="inputField" defaultValue={0} onInput={this.handleNum.bind(this)} />
 				<Select num={item.key.toString()} value={item.option} handleChange={this.handleChange} />
-				<button onClick={this.deleteExcercise.bind(this, item.key)}>X</button>
+				<br />
+				<span>Times performed:</span>
+				<input type="text" pattern="[0-9]*" className="inputFieldMulti" defaultValue={0} onInput={this.changeExcerciseMulti.bind(this, item.key)} />
+				<br />
+				<button onClick={this.deleteExcercise.bind(this, item.key)}>Delete</button>
 			</li>
 		);
 	}
@@ -114,8 +130,8 @@ class Mainpart extends React.Component {
 				<ul>
 					{this.props.mainpart.map(this.createInputField)}
 				</ul>
-				<button onClick={this.addField}>Add Excercise</button>
-				<button onClick={this.addCombo}>Add Combo</button>
+				<button className="addExcercise" onClick={this.addField}>Add Excercise</button>
+				<button className="addCombo" onClick={this.addCombo}>Add Combo</button>
 			</div>
 		);
 	}
@@ -134,5 +150,6 @@ const mapDispatchToProps = {
 	deleteExcercise,
 	deleteComboExcercise,
 	changeMultiplierCombo,
+	changeExcerciseMulti,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Mainpart);

@@ -40,7 +40,7 @@ class Input extends React.Component {
 				<Warmup />
 				<Mainpart />
 				<CoolDown />
-				<button onClick={this.postData}>Post</button>
+				<button className="post" onClick={this.postData}>Post</button>
 			</div>
 		);
 	}

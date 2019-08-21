@@ -57,13 +57,13 @@ const mainpart = (state = [], action) => {
 			newState[action.id].dist = parseInt(action.dist);
 			return newState;
 		case ADD_EXCERCISEMP:
-			newState.push({ key: state.length, dist: 0, option: 'sprint', excerciseMultiplier: 1 });
+			newState.push({ key: state.length, excerciseID: action.id, dist: 0, option: 'sprint', excerciseMultiplier: 1 });
 			return newState;
 		case ADD_COMBO:
-			newState.push({ key: state.length, option: 'combo', comboID: action.id, excerciseMultiplier: 1, comboMultiplier: 1, data: [{ key: 0, dist: 0, option: 'sprint' }] })
+			newState.push({ key: state.length, option: 'combo', comboID: action.id, excerciseMultiplier: 1, comboMultiplier: 1, data: [{ key: 0, dist: 0, excerciseID: 1, option: 'sprint' }] })
 			return newState;
 		case ADD_COMBO_EXCERCISE:
-			newState[action.key].data.push({ key: state[action.key].data.length, dist: 0, option: 'sprint' })
+			newState[action.key].data.push({ key: state[action.key].data.length, dist: 0, excerciseID: newState[action.key].data.length + 1, option: 'sprint' })
 			return newState;
 		case CHANGE_MULTIPLIER_COMBO:
 			newState[action.id].comboMultiplier = parseInt(action.multi);

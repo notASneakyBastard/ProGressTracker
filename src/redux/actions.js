@@ -18,6 +18,7 @@ import {
 	SIGN_IN,
 	SIGN_OUT,
 	CHANGE_MULTIPLIER_COMBO,
+	CHANGE_EXCERCISE_MULTI,
 } from './types';
 
 export function changeDistance(id, d, dist) {
@@ -84,7 +85,7 @@ export function changeDistanceCombo(id, key, dist) {
 	}
 }
 
-export function addExcercise(d) {
+export function addExcercise(d, id = 0) {
 	switch (d) {
 		case 0:
 			return {
@@ -93,6 +94,7 @@ export function addExcercise(d) {
 		case 1:
 			return {
 				type: ADD_EXCERCISEMP,
+				id,
 			}
 	}
 }
@@ -156,6 +158,14 @@ export function afterSignOut(){
 export function changeMultiplierCombo(id, multi){
 	return {
 		type: CHANGE_MULTIPLIER_COMBO,
+		id,
+		multi,
+	}
+}
+
+export function changeExcerciseMulti(id, multi){
+	return {
+		type: CHANGE_EXCERCISE_MULTI,
 		id,
 		multi,
 	}

@@ -36,7 +36,7 @@ class Warmup extends React.Component {
 		console.log(item)
 		return (
 			<li key={item.key}>
-				<input name={item.key.toString()} defaultValue={0} type="text" pattern="[0-9]*" onInput={this.handleNum.bind(this)} />
+				<input name={item.key.toString()} className="inputField" defaultValue={0} type="text" pattern="[0-9]*" onInput={this.handleNum.bind(this)} />
 				<Select num={item.key.toString()} value={item.option} handleChange={this.handleChange} />
 				<button onClick={this.deleteExcercise.bind(this, item.key)}>X</button> 
 			</li>
@@ -50,7 +50,7 @@ class Warmup extends React.Component {
 				<ul>
 					{this.props.warmup.map(this.createInputField)}
 				</ul>
-				<button onClick={this.addField}>+</button>
+				<button className="addExcercise" onClick={this.addField}>Add Excercise</button>
 			</div>
 		);
 	}
