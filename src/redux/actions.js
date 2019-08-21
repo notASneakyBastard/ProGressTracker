@@ -14,6 +14,10 @@ import {
 	DELETE_COMBO_EXCERCISE,
 	CHANGE_DISTANCECD,
 	CHANGE_TYPECD,
+	RESET,
+	SIGN_IN,
+	SIGN_OUT,
+	CHANGE_MULTIPLIER_COMBO,
 } from './types';
 
 export function changeDistance(id, d, dist) {
@@ -93,9 +97,10 @@ export function addExcercise(d) {
 	}
 }
 
-export function addCombo() {
+export function addCombo(combo) {
 	return {
 		type: ADD_COMBO,
+		id: combo,
 	}
 }
 
@@ -126,5 +131,32 @@ export function deleteComboExcercise(id, key) {
 		type: DELETE_COMBO_EXCERCISE,
 		id,
 		key,
+	}
+}
+
+export function reset(){
+	return {
+		type: RESET,
+	}
+}
+
+export function afterSignIn(user){
+	return {
+		type: SIGN_IN,
+		user,
+	}
+}
+
+export function afterSignOut(){
+	return {
+		type: SIGN_OUT,
+	}
+}
+
+export function changeMultiplierCombo(id, multi){
+	return {
+		type: CHANGE_MULTIPLIER_COMBO,
+		id,
+		multi,
 	}
 }

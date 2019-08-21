@@ -25,11 +25,11 @@ class CoolDown extends React.Component {
 	render() {
 		console.log(this.props)
 		return (
-			<div>
+			<div className="cooldown">
 				<h2>Cool Down</h2>
 				<ul>
 					<li>
-						<input name="cooldown" type="text" pattern="[0-9]*" onInput={this.handleNum.bind(this)} />
+						<input name="cooldown" defaultValue={0} type="text" pattern="[0-9]*" onInput={this.handleNum.bind(this)} />
 						<select name="cooldown" onChange={this.handleChange}>
 							<option value="10km">10 km tempo</option>
 							<option value="hm">Half-marathon tempo</option>

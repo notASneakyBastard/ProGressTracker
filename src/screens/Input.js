@@ -1,7 +1,7 @@
 import React from 'react';
 import { Warmup, Mainpart, CoolDown } from '../components/Components';
 import { connect } from 'react-redux';
-import { changeType, changeDistance, addExcercise } from '../redux/actions';
+import { changeType, changeDistance, addExcercise, reset } from '../redux/actions';
 
 class Input extends React.Component {
 	constructor(props) {
@@ -11,31 +11,36 @@ class Input extends React.Component {
 			data: [{ key: 0, value: 0, option: 'sprint' }],
 			inc: 1,
 		}
-		this.handleChange = this.handleChange.bind(this);
+		this.postData = this.postData.bind(this);
 	}
-	handleChange(event) {
-		console.log(event.target.value);
-		console.log(event.target.name);
-		this.props.changeType(event.target.name, 0, event.target.value);
-		let { data } = this.state;
-		data[event.target.name].option = event.target.value;
-		this.setState({ data: data });
-	}
-	handleNum(event) {
-		console.log(event.target.value);
-		console.log(event.target.name);
-		this.props.changeDistance(event.target.name, 0, event.target.value);
-		let { data } = this.state;
-		data[event.target.name].value = parseInt(event.target.value);
-		this.setState({ data: data });
+	postData(){
+		let { warmup, mainpart, cooldown, user } = this.props;
+		console.log(warmup, mainpart, cooldown, user.uid);
+		let url = 'https://us-central1-progressmonitor-398b2.cloudfunctions.net/api/addData/';
+		fetch(url, {
+			method: 'POST',
+			mode: 'cors',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ warmup: warmup, mainpart: mainpart, cooldown: cooldown, uid: user.uid })
+		})
+		.then(response => response.json())
+		.then(responseJson => {
+			this.props.reset();
+			console.log(responseJson);
+			console.log("Upalilo valjd");
+		})
+		.catch(err => console.error(err));
 	}
 	render() {
 		console.log(this.props)
 		return (
-			<div>
+			<div className="input">
 				<Warmup />
 				<Mainpart />
 				<CoolDown />
+				<button onClick={this.postData}>Post</button>
 			</div>
 		);
 	}
@@ -46,6 +51,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
 	changeDistance,
 	changeType,
-	addExcercise
+	addExcercise,
+	reset
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Input);

@@ -20,27 +20,23 @@ class Warmup extends React.Component {
 		console.log(event.target.value);
 		console.log(event.target.name);
 		this.props.changeType(event.target.name, 0, event.target.value);
-		this.forceUpdate();
 	}
 	handleNum(event) {
 		console.log(event.target.value);
 		console.log(event.target.name);
 		this.props.changeDistance(event.target.name, 0, event.target.value);
-		this.forceUpdate();
 	}
 	addField() {
 		this.props.addExcercise(0);
-		this.forceUpdate();
 	}
 	deleteExcercise(id){
 		this.props.deleteExcercise(id, 0);
-		this.forceUpdate();
 	}
 	createInputField(item) {
 		console.log(item)
 		return (
 			<li key={item.key}>
-				<input name={item.key.toString()} type="text" pattern="[0-9]*" onInput={this.handleNum.bind(this)} />
+				<input name={item.key.toString()} defaultValue={0} type="text" pattern="[0-9]*" onInput={this.handleNum.bind(this)} />
 				<Select num={item.key.toString()} value={item.option} handleChange={this.handleChange} />
 				<button onClick={this.deleteExcercise.bind(this, item.key)}>X</button> 
 			</li>
@@ -49,7 +45,7 @@ class Warmup extends React.Component {
 	render() {
 		console.log(this.props)
 		return (
-			<div>
+			<div className="warmup">
 				<h2>Warmup</h2>
 				<ul>
 					{this.props.warmup.map(this.createInputField)}

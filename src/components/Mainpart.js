@@ -1,21 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Select } from './Components';
-import { 
-	changeType, 
-	changeDistance, 
-	addExcercise, 
-	addCombo, 
-	addComboExcercise, 
-	changeDistanceCombo, 
+import {
+	changeType,
+	changeDistance,
+	addExcercise,
+	addCombo,
+	addComboExcercise,
+	changeDistanceCombo,
 	changeTypeCombo,
 	deleteExcercise,
 	deleteComboExcercise,
+	changeMultiplierCombo
 } from '../redux/actions';
 
 class Mainpart extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			combos: 1,
+		}
 		this.createInputField = this.createInputField.bind(this);
 		this.addField = this.addField.bind(this);
 		this.handleChange = this.handleChange.bind(this);
@@ -36,29 +40,28 @@ class Mainpart extends React.Component {
 	}
 	addField() {
 		this.props.addExcercise(1);
-		this.forceUpdate();
 	}
 	addComboExcercise(key) {
 		this.props.addComboExcercise(key);
-		this.forceUpdate();
 	}
 	addCombo() {
-		this.props.addCombo();
-		this.forceUpdate()
+		let { combos } = this.state
+		this.props.addCombo(combos);
+		this.setState({
+			combos: combos + 1,
+		})
 	}
 	changeDistanceCombo(id, event) {
 		console.log(event.target.value);
 		console.log(event.target.name);
 		console.log(id);
 		this.props.changeDistanceCombo(id, event.target.name, event.target.value);
-		this.forceUpdate();
 	}
 	changeTypeCombo(id, event) {
 		console.log(event.target.value);
 		console.log(event.target.name);
 		console.log(id);
 		this.props.changeTypeCombo(id, event.target.name, event.target.value);
-		this.forceUpdate();
 	}
 	createInputFieldCombo(id, item) {
 		console.log(item, id);
@@ -70,37 +73,43 @@ class Mainpart extends React.Component {
 			</li>
 		);
 	}
-	deleteComboExcercise(id, key){
-		this.props.deleteComboExcercise(id, key);
-		this.forceUpdate();
+	changeMultiplierCombo(id, event) {
+		this.props.changeMultiplierCombo(id, event.target.value);
 	}
-	deleteExcercise(id){
+	deleteComboExcercise(id, key) {
+		this.props.deleteComboExcercise(id, key);
+	}
+	deleteExcercise(id) {
 		this.props.deleteExcercise(id, 1);
-		this.forceUpdate();
 	}
 	createInputField(item) {
 		console.log(item);
 		if (item.option === 'combo') {
 			return (
 				<ul>
+					<h4>Combo #{item.comboID}</h4>
 					{item.data.map(this.createInputFieldCombo.bind(this, item.key))}
+					<div>
+						Times performed:
+						<input name={item.key.toString()} defaultValue={1} type="text" pattern="[0-9]*" onInput={this.changeMultiplierCombo.bind(this, item.key)} />
+					</div>
 					<button onClick={this.addComboExcercise.bind(this, item.key)}>+</button>
 					<button onClick={this.deleteExcercise.bind(this, item.key)}>X</button>
 				</ul>
 			)
 		}
 		return (
-			<li key={item.key}>
+			<li key={item.key} className="excercise">
 				<input name={item.key.toString()} type="text" pattern="[0-9]*" onInput={this.handleNum.bind(this)} />
 				<Select num={item.key.toString()} value={item.option} handleChange={this.handleChange} />
-				<button onClick={this.deleteExcercise.bind(this, item.key)}>X</button> 
+				<button onClick={this.deleteExcercise.bind(this, item.key)}>X</button>
 			</li>
 		);
 	}
 	render() {
 		console.log(this.props)
 		return (
-			<div>
+			<div className="mainpart">
 				<h2>Main Part</h2>
 				<ul>
 					{this.props.mainpart.map(this.createInputField)}
@@ -124,5 +133,6 @@ const mapDispatchToProps = {
 	changeTypeCombo,
 	deleteExcercise,
 	deleteComboExcercise,
+	changeMultiplierCombo,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Mainpart);

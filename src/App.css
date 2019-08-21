@@ -1,5 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Shojumaru|Sonsie+One&display=swap');
+
 .App {
   text-align: center;
+  background-color: #F2F2FC;
+  width: 100%;
+  min-height: 100vh;
 }
 
 .App-logo {
@@ -23,6 +28,11 @@
   color: #61dafb;
 }
 
+.title {
+  font-family: 'Shojumaru', cursive;
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -34,7 +44,6 @@
 
 li {
   display: inline;
-  padding: 14px 16px;
 }
 
 ul {
@@ -42,13 +51,187 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #33a;
 }
 
 li a {
   display: inline;
-  color: white;
+  color: #F2F2FC;
   text-align: center;
-  padding: 14px 16px 14px 16px;
   text-decoration: none;
+}
+
+.inline {
+  display: inline-block;
+  margin: 50px;
+}
+
+.navbar {
+  background-color: #0B4F6C;
+  display: inline-block;
+  width: 100%;
+}
+
+.navbar h1 {
+  display: inline-block;
+  max-height: 80px;
+  margin: 0px;
+  padding: 23px;
+  text-align: center;
+}
+
+.navbar ul {
+  background-color: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  align-items: center;
+
+}
+
+
+.navbar li {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  float: right;
+}
+.navbar a {
+  display: block;
+  text-align: center;
+  justify-content: center;
+  padding: 27px 37px;
+  
+  font-size: 23px;
+}
+
+.active {
+  background-color: #919191;
+}
+
+
+.title a {
+  padding: 0px; 
+  color: #F2F2FC;
+  text-align: center;
+  text-decoration: none;
+}
+
+.input {
+  width: 40%;
+  margin-left: 30%;
+}
+.input ul {
+  display: block;
+}
+
+.input li {
+  display: block;
+}
+
+.warmup {
+  background-color: #0093BC;
+  border-radius: 11px;
+  width: 100%;
+}
+
+.warmup input {
+  margin: 12px 5px;
+}
+
+.warmup select {
+  margin: 12px 5px;
+}
+
+.warmup li button {
+  margin: 12px 20px;
+  padding: 4px 9px;
+  font-weight: bold;
+  font-size: 15px;
+  background-color: #dc3545;
+  color: #F2F2FC;
+  border: 1px solid #dc3545;
+  border-radius: 5px;
+}
+
+.warmup h2 {
+  padding: 18px 0px 0px 0px;
+  color: #F2F2FC;
+}
+
+.warmup button {
+  margin-bottom: 10px;
+}
+
+.mainpart {
+  background-color: #0093BC;
+  border-radius: 11px;
+  width: 100%;
+}
+
+.mainpart h2 {
+  padding: 18px 0px 0px 0px;
+  color: #F2F2FC;
+}
+
+.mainpart button {
+  margin: 0px 5px 10px 10px;
+}
+
+.mainpart ul ul {
+  background-color: #0B5575;
+  width: 70%;
+  margin-left: 15%;
+  border-radius: 5px;
+  padding: 15px 0px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.mainpart ul ul button {
+  margin: 5px;
+}
+
+.mainpart h4 {
+  margin: 10px,
+
+}
+ 
+.excercise {
+  margin: 8px;
+}
+
+.excercise input {
+  margin: 1px 5px;
+}
+
+.excercise button {
+  margin: 1px 5px;
+}
+
+.excercise select {
+  margin: 1px 5px;
+}
+
+.cooldown {
+  background-color: #0093BC;
+  border-radius: 11px;
+  width: 100%;
+}
+
+.cooldown ul {
+  padding: 10px 0px;
+}
+
+.cooldown  input {
+  margin: 0px 5px 12px 5px;
+}
+
+.cooldown h2 {
+  padding: 18px 0px 0px 0px;
+  color: #F2F2FC;
+}
+
+.cooldown select {
+  margin: 0px 5px 12px 5px;
 }
