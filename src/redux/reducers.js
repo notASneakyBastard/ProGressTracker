@@ -20,6 +20,7 @@ import {
 	CHANGE_MULTIPLIER_COMBO,
 	CHANGE_EXCERCISE_MULTI,
 	CHANGE_DATE,
+	ADD_TRAININGS,
 } from './types';
 import { combineReducers } from 'redux'
 
@@ -135,8 +136,10 @@ const timestamp = (state = Date.now(), action) => {
 	}
 }
 
-const trainings = (state = {}, action) => {
+const trainings = (state = [], action) => {
 	switch(action.type){
+		case ADD_TRAININGS:
+			return action.logs;
 		default:
 			return state;
 	}

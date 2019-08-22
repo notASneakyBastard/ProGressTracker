@@ -20,6 +20,7 @@ import {
 	CHANGE_MULTIPLIER_COMBO,
 	CHANGE_EXCERCISE_MULTI,
 	CHANGE_DATE,
+	ADD_TRAININGS,
 } from './types';
 
 export function changeDistance(id, d, dist) {
@@ -176,5 +177,12 @@ export function changeDate(date){
 	return {
 		type: CHANGE_DATE,
 		date,
+	}
+}
+
+export function addTrainings(logs){
+	return {
+		type: ADD_TRAININGS,
+		logs,
 	}
 }
