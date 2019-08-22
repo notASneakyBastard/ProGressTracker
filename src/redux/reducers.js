@@ -19,6 +19,7 @@ import {
 	SIGN_OUT,
 	CHANGE_MULTIPLIER_COMBO,
 	CHANGE_EXCERCISE_MULTI,
+	CHANGE_DATE,
 } from './types';
 import { combineReducers } from 'redux'
 
@@ -125,5 +126,21 @@ const userInfo = (state = { type: 'none' }, action) => {
 	}
 }
 
-const root = combineReducers({ warmup, mainpart, cooldown, userInfo });
+const timestamp = (state = Date.now(), action) => {
+	switch(action.type){
+		case CHANGE_DATE:
+			return action.date;
+		default:
+			return state;
+	}
+}
+
+const trainings = (state = {}, action) => {
+	switch(action.type){
+		default:
+			return state;
+	}
+}
+
+const root = combineReducers({ warmup, mainpart, cooldown, userInfo, timestamp, trainings });
 export default root;

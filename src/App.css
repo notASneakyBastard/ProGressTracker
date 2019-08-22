@@ -311,3 +311,24 @@ li a {
   width: 80%;
   margin-left: 10%;
 }
+
+.dateInput {
+  margin: 20px;
+  width: 70%;
+  margin-left: 15%;
+  background-color: #1EB24F;
+  color: #F2F2FC;
+  border: 1px solid #1EB24F;
+  border-radius: 6px;
+  padding: 13px 8px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.dateInput span {
+  margin: 5px;
+}
+
+.dateInput input {
+  margin: 5px;
+}

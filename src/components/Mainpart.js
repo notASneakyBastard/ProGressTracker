@@ -12,7 +12,7 @@ import {
 	deleteExcercise,
 	deleteComboExcercise,
 	changeMultiplierCombo,
-	changeExcerciseMulti
+	changeExcerciseMulti,
 } from '../redux/actions';
 
 class Mainpart extends React.Component {
@@ -74,7 +74,7 @@ class Mainpart extends React.Component {
 		return (
 			<li key={item.key} className="excercise inCombo">
 				<h4>Excercise #{item.excerciseID}</h4>
-				<input name={item.key.toString()} type="text" pattern="[0-9]*" onInput={this.changeDistanceCombo.bind(this, id)} />
+				<input name={item.key.toString()} className="inputField" type="text" pattern="[0-9]*" onInput={this.changeDistanceCombo.bind(this, id)} />
 				<Select num={item.key.toString()} value={item.option} handleChange={this.changeTypeCombo.bind(this, id)} />
 				<br />
 				<button className="delete" onClick={this.deleteComboExcercise.bind(this, id, item.key)}>Delete</button>
@@ -101,8 +101,12 @@ class Mainpart extends React.Component {
 					<h4>Combo #{item.comboID}</h4>
 					{item.data.map(this.createInputFieldCombo.bind(this, item.key))}
 					<div>
-						Times performed:
-						<input name={item.key.toString()} defaultValue={1} type="text" pattern="[0-9]*" onInput={this.changeMultiplierCombo.bind(this, item.key)} />
+						<span>Times performed excercises in combo: </span>
+						<input name={item.key.toString()} className="inputFieldMulti" defaultValue={1} type="text" pattern="[0-9]*" onInput={this.changeMultiplierCombo.bind(this, item.key)} />
+					</div>
+					<div>
+						<span>Times performed combo: </span>
+						<input name={item.key.toString()} className="inputFieldMulti" defaultValue={1} type="text" pattern="[0-9]*" onInput={this.changeExcerciseMulti.bind(this, item.key)} />
 					</div>
 					<button className="addExcercise" onClick={this.addComboExcercise.bind(this, item.key)}>Add Excercise</button>
 					<button className="delete" onClick={this.deleteExcercise.bind(this, item.key)}>Delete Combo</button>
@@ -115,7 +119,7 @@ class Mainpart extends React.Component {
 				<input name={item.key.toString()} type="text" pattern="[0-9]*" className="inputField" defaultValue={0} onInput={this.handleNum.bind(this)} />
 				<Select num={item.key.toString()} value={item.option} handleChange={this.handleChange} />
 				<br />
-				<span>Times performed:</span>
+				<span>Times performed: </span>
 				<input type="text" pattern="[0-9]*" className="inputFieldMulti" defaultValue={0} onInput={this.changeExcerciseMulti.bind(this, item.key)} />
 				<br />
 				<button onClick={this.deleteExcercise.bind(this, item.key)}>Delete</button>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Warmup, Mainpart, CoolDown } from '../components/Components';
 import { connect } from 'react-redux';
-import { changeType, changeDistance, addExcercise, reset } from '../redux/actions';
+import { changeType, changeDistance, addExcercise, reset, changeDate } from '../redux/actions';
 
 class Input extends React.Component {
 	constructor(props) {
@@ -12,8 +12,14 @@ class Input extends React.Component {
 			inc: 1,
 		}
 		this.postData = this.postData.bind(this);
+		this.changeDate = this.changeDate.bind(this);
 	}
-	postData(){
+	changeDate(event) {
+		console.log(event.target.value);
+		var timestamp = Date.UTC(parseInt(event.target.value.substring(0, 4)), parseInt(event.target.value.substring(5, 7)), parseInt(event.target.value.substring(7)));
+		this.props.changeDate(event.target.value);
+	}
+	postData() {
 		let { warmup, mainpart, cooldown, user } = this.props;
 		console.log(warmup, mainpart, cooldown, user.uid);
 		let url = 'https://us-central1-progressmonitor-398b2.cloudfunctions.net/api/addData/';
@@ -25,13 +31,13 @@ class Input extends React.Component {
 			},
 			body: JSON.stringify({ warmup: warmup, mainpart: mainpart, cooldown: cooldown, uid: user.uid })
 		})
-		.then(response => response.json())
-		.then(responseJson => {
-			this.props.reset();
-			console.log(responseJson);
-			console.log("Upalilo valjd");
-		})
-		.catch(err => console.error(err));
+			.then(response => response.json())
+			.then(responseJson => {
+				this.props.reset();
+				console.log(responseJson);
+				console.log("Upalilo valjd");
+			})
+			.catch(err => console.error(err));
 	}
 	render() {
 		console.log(this.props)
@@ -40,6 +46,10 @@ class Input extends React.Component {
 				<Warmup />
 				<Mainpart />
 				<CoolDown />
+				<div className="dateInput">
+					<span>Date of training: </span>
+					<input type="date" onChange={this.changeDate} data-date-format="DD-MM-YYYY" defaultValue={(new Date(this.props.timestamp)).toISOString().substring(0, 10)} />
+				</div>
 				<button className="post" onClick={this.postData}>Post</button>
 			</div>
 		);
@@ -52,6 +62,7 @@ const mapDispatchToProps = {
 	changeDistance,
 	changeType,
 	addExcercise,
-	reset
+	reset,
+	changeDate,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Input);

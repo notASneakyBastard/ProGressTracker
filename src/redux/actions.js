@@ -19,6 +19,7 @@ import {
 	SIGN_OUT,
 	CHANGE_MULTIPLIER_COMBO,
 	CHANGE_EXCERCISE_MULTI,
+	CHANGE_DATE,
 } from './types';
 
 export function changeDistance(id, d, dist) {
@@ -168,5 +169,12 @@ export function changeExcerciseMulti(id, multi){
 		type: CHANGE_EXCERCISE_MULTI,
 		id,
 		multi,
+	}
+}
+
+export function changeDate(date){
+	return {
+		type: CHANGE_DATE,
+		date,
 	}
 }
