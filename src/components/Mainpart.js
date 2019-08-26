@@ -29,14 +29,10 @@ class Mainpart extends React.Component {
 		this.addCombo = this.addCombo.bind(this);
 	}
 	handleChange(event) {
-		console.log(event.target.value);
-		console.log(event.target.name);
 		this.props.changeType(event.target.name, 1, event.target.value);
 		this.forceUpdate();
 	}
 	handleNum(event) {
-		console.log(event.target.value);
-		console.log(event.target.name);
 		this.props.changeDistance(event.target.name, 1, event.target.value);
 		this.forceUpdate();
 	}
@@ -58,19 +54,13 @@ class Mainpart extends React.Component {
 		})
 	}
 	changeDistanceCombo(id, event) {
-		console.log(event.target.value);
-		console.log(event.target.name);
-		console.log(id);
+
 		this.props.changeDistanceCombo(id, event.target.name, event.target.value);
 	}
 	changeTypeCombo(id, event) {
-		console.log(event.target.value);
-		console.log(event.target.name);
-		console.log(id);
 		this.props.changeTypeCombo(id, event.target.name, event.target.value);
 	}
 	createInputFieldCombo(id, item) {
-		console.log(item, id);
 		return (
 			<li key={item.key} className="excercise inCombo">
 				<h4>Excercise #{item.excerciseID}</h4>
@@ -94,7 +84,6 @@ class Mainpart extends React.Component {
 		this.props.changeExcerciseMulti(id, event.target.value);
 	}
 	createInputField(item) {
-		console.log(item);
 		if (item.option === 'combo') {
 			return (
 				<ul>
@@ -120,14 +109,13 @@ class Mainpart extends React.Component {
 				<Select num={item.key.toString()} value={item.option} handleChange={this.handleChange} />
 				<br />
 				<span>Times performed: </span>
-				<input type="text" pattern="[0-9]*" className="inputFieldMulti" defaultValue={0} onInput={this.changeExcerciseMulti.bind(this, item.key)} />
+				<input type="text" pattern="[0-9]*" className="inputFieldMulti" defaultValue={1} onInput={this.changeExcerciseMulti.bind(this, item.key)} />
 				<br />
 				<button onClick={this.deleteExcercise.bind(this, item.key)}>Delete</button>
 			</li>
 		);
 	}
 	render() {
-		console.log(this.props)
 		return (
 			<div className="mainpart">
 				<h2>Main Part</h2>

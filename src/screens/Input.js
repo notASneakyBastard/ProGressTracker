@@ -2,11 +2,12 @@ import React from 'react';
 import { Warmup, Mainpart, CoolDown } from '../components/Components';
 import { connect } from 'react-redux';
 import { changeType, changeDistance, addExcercise, reset, changeDate } from '../redux/actions';
+import { Link } from 'react-router-dom';
+import { RingLoader } from 'react-spinners';
 
 class Input extends React.Component {
 	constructor(props) {
 		super(props);
-		console.log(this.props);
 		this.state = {
 			data: [{ key: 0, value: 0, option: 'sprint' }],
 			inc: 1,
@@ -15,13 +16,16 @@ class Input extends React.Component {
 		this.changeDate = this.changeDate.bind(this);
 	}
 	changeDate(event) {
-		console.log(event.target.value);
-		var timestamp = Date.UTC(parseInt(event.target.value.substring(0, 4)), parseInt(event.target.value.substring(5, 7)), parseInt(event.target.value.substring(7)));
-		this.props.changeDate(event.target.value);
+		if (event.target.value === "") {
+			return;
+		}
+		else {
+			var timestamp = Date.UTC(parseInt(event.target.value.substring(0, 4)), parseInt(event.target.value.substring(5, 7)), parseInt(event.target.value.substring(7)));
+			this.props.changeDate(event.target.value);
+		}
 	}
 	postData() {
 		let { warmup, mainpart, cooldown, user } = this.props;
-		console.log(warmup, mainpart, cooldown, user.uid);
 		let url = 'https://us-central1-progressmonitor-398b2.cloudfunctions.net/api/addData/';
 		fetch(url, {
 			method: 'POST',
@@ -34,13 +38,25 @@ class Input extends React.Component {
 			.then(response => response.json())
 			.then(responseJson => {
 				this.props.reset();
-				console.log(responseJson);
-				console.log("Upalilo valjd");
 			})
 			.catch(err => console.error(err));
 	}
+	min(a, b) {
+		return a < b ? a : b;
+	}
 	render() {
-		console.log(this.props)
+		
+		if(this.props.user == undefined){
+			let size = this.min(window.innerHeight * 0.6, window.innerWidth * 0.6);
+			return (
+				<div style={{ alignContent: 'center', width: size, paddingTop: '90px', marginLeft: (window.innerWidth - size) / 2 }}>
+					<RingLoader size={size} />
+				</div>
+			);
+		}
+		if(this.props.user == null){
+			return(<p>Please <Link to='/login'>log in</Link></p>)
+		}
 		return (
 			<div className="input">
 				<Warmup />
@@ -48,7 +64,7 @@ class Input extends React.Component {
 				<CoolDown />
 				<div className="dateInput">
 					<span>Date of training: </span>
-					<input type="date" onChange={this.changeDate} data-date-format="DD-MM-YYYY" defaultValue={(new Date(this.props.timestamp)).toISOString().substring(0, 10)} />
+					<input type="date" onChange={this.changeDate} defaultValue={(new Date(this.props.timestamp)).toISOString().substring(0, 10)} />
 				</div>
 				<button className="post" onClick={this.postData}>Post</button>
 			</div>

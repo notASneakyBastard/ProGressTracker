@@ -60,6 +60,12 @@ li a {
   text-decoration: none;
 }
 
+input {
+  border: none;
+  border-radius: 5px;
+  padding: 2px 1px;
+}
+
 .inline {
   display: inline-block;
   margin: 50px;
@@ -67,13 +73,15 @@ li a {
 
 .navbar {
   background-color: #0B4F6C;
-  display: inline-block;
   width: 100%;
+  position: fixed;
+  margin-top: 0px;
 }
 
 .navbar h1 {
   display: inline-block;
   max-height: 80px;
+  font-size: 65px;
   margin: 0px;
   padding: 23px;
   text-align: center;
@@ -95,6 +103,8 @@ li a {
   align-items: center;
   text-align: center;
   float: right;
+  font-weight: 500;
+  font-family: 'Shojumaru', cursive;
 }
 .navbar a {
   display: block;
@@ -115,11 +125,13 @@ li a {
   color: #F2F2FC;
   text-align: center;
   text-decoration: none;
+  font-size: 28px;
 }
 
 .input {
   width: 40%;
   margin-left: 30%;
+  padding-top: 85px;
 }
 .input ul {
   display: block;
@@ -172,6 +184,10 @@ li a {
 .mainpart h2 {
   padding: 18px 0px 0px 0px;
   color: #F2F2FC;
+}
+
+.mainpart li {
+  display: block;
 }
 
 .mainpart button {
@@ -331,4 +347,85 @@ li a {
 
 .dateInput input {
   margin: 5px;
+}
+
+.trainings {
+  padding-top: 85px;
+}
+
+.trainings ul div {
+  background-color: #1EB24F;
+  width: 50%;
+  margin-left: 25%;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  border: 1px solid #1EB24F;
+  border-radius: 7px;
+}
+
+.training {
+  background-color: #0B4F6C;
+  border-radius: 11px;
+  width: 100%;
+}
+
+.training ul li {
+    margin: 10px;
+    width: 66%;
+    margin-left: 17%;
+    border-radius: 5px;
+    display: block;
+}
+
+.training h2 {
+  padding: 15px 0px 0px 0px;
+  color: #F2F2FC;
+}
+
+
+.training h4 {
+  padding-top: 10px;
+  color: #F2F2FC;
+}
+
+.training span {
+  color: #F2F2FC;
+  margin: 10px 5px;
+}
+
+.training div {
+  margin-bottom: 10px;
+}
+
+.cell {
+  display: block;
+  text-align: center;
+}
+
+.cell h3 {
+  display: inline-block;
+  width: 30%;
+  color: #F2F2FC;
+}
+
+.cell ul {
+  display: inline-table;
+  width: 70%;
+  height: 100%;
+  margin: auto;
+}
+
+.cell li {
+  text-align: center;
+  display: block;
+}
+
+.cell ul ul {
+  border: 1px solid #F2F2FC;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.main :first-child {
+  margin-top: 5px;
 }

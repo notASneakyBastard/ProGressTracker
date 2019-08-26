@@ -21,6 +21,7 @@ import {
 	CHANGE_EXCERCISE_MULTI,
 	CHANGE_DATE,
 	ADD_TRAININGS,
+	ADD_LOGS,
 } from './types';
 
 export function changeDistance(id, d, dist) {
@@ -183,6 +184,13 @@ export function changeDate(date){
 export function addTrainings(logs){
 	return {
 		type: ADD_TRAININGS,
+		logs,
+	}
+}
+
+export function addLogs(logs){
+	return {
+		type: ADD_LOGS,
 		logs,
 	}
 }

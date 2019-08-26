@@ -21,6 +21,7 @@ import {
 	CHANGE_EXCERCISE_MULTI,
 	CHANGE_DATE,
 	ADD_TRAININGS,
+	ADD_LOGS,
 } from './types';
 import { combineReducers } from 'redux'
 
@@ -145,5 +146,14 @@ const trainings = (state = [], action) => {
 	}
 }
 
-const root = combineReducers({ warmup, mainpart, cooldown, userInfo, timestamp, trainings });
+const logs = (state = {}, action) => {
+	switch(action.type){
+		case ADD_LOGS:
+			return action.logs;
+		default:
+			return state;
+	}
+}
+
+const root = combineReducers({ warmup, mainpart, cooldown, userInfo, timestamp, trainings, logs });
 export default root;

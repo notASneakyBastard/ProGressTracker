@@ -35,7 +35,7 @@ export default class DoughnutChart extends React.Component {
 	componentDidUpdate() {
 		this.myChart.data.labels = this.props.data.map(d => d.label);
 		this.myChart.data.datasets[0].data = this.props.data.map(d => d.value);
-		this.myChart.data.text = this.props.data.map(d => d.value).reduce((a, b) => a + b, 0);
+		this.myChart.data.text = this.props.data.map(d => d.value).reduce((a, b) => a + b, 0) + ' m';
 		this.myChart.update();
 	}
 

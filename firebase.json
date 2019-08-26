@@ -1,11 +1,16 @@
 {
   "hosting": {
     "public": "build",
+    "site": "pro-gress-monitor",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ]
+    ],
+    "rewrites": [ {
+      "source": "**",
+      "destination": "/index.html"
+     }]
   },
   "database": {
     "rules": "database.rules.json"

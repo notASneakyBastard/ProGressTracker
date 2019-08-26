@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Home, Input, LogIn, Trainings } from './screens/Screens';
+import { Home, Input, LogIn, Trainings, Training } from './screens/Screens';
 import { BrowserRouter as Router, Route, Link, NavLink } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -51,7 +51,7 @@ class Root extends React.Component {
 											<NavLink exact to="/input/">Add</NavLink>
 										</li>
 										<li>
-											<NavLink exact to="/trainings">Trainings</NavLink>
+											<NavLink to="/trainings">Trainings</NavLink>
 										</li>
 										<li>
 											<NavLink exact to="/">Home</NavLink>
@@ -61,9 +61,10 @@ class Root extends React.Component {
 							</nav>
 
 							<Route path="/" exact render={() => <Home user={props.user} />} />
-							<Route path="/input/" render={() => <Input user={props.user} />} />
+							<Route path="/input/" render={() => <Input { ...props} />} />
 							<Route path="/login/" render={() => <LogIn {...props} />} />
 							<Route path="/trainings" exact render={() => <Trainings user={props.user} />} />
+							<Route path="/trainings/:timestamp" render={(routeProps) => <Training {...props} { ...routeProps} />} />
 						</div>
 					</Router>
 				</div>
