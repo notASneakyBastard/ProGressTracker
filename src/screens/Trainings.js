@@ -73,19 +73,27 @@ class Trainings extends React.Component {
 	}
 	render() {
 
-		if (this.props.user == undefined) {
+		if (this.props.user === undefined) {
 			let size = this.min(window.innerHeight * 0.6, window.innerWidth * 0.6);
 			return (
-				<div style={{ alignContent: 'center', width: size, paddingTop: '90px', marginLeft: (window.innerWidth - size) / 2 }}>
+				<div style={{ alignContent: 'center', width: size, paddingTop: '90px', marginLeft: ((window.innerWidth - size) / 2) }}>
 					<RingLoader size={size} />
 				</div>
 			);
 		}
-		if (this.props.user == null) {
-			return (<p>Please <Link to='/login'>log in</Link></p>)
+		if (this.props.user === null) {
+			return (
+				<div style={{ paddingTop: '90px' }}>
+					<p style={{ fontSize: '25px' }}>Please <Link to="/login">log in</Link></p>
+				</div>
+			);
 		}
 		if (this.state.empty) {
-			return (<p>You don't have any trainings yet. Add them in <Link to='/input'>Add</Link> tab.</p>)
+			return (
+				<div style={{ paddingTop: '90px' }}>
+					<p style={{ fontSize: '25px' }}>You don't have any trainings yet. Add them in <Link to='/input'>Add</Link> tab.</p>
+				</div>
+			);
 		}
 		return (
 			<div className="trainings">

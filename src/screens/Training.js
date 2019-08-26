@@ -79,7 +79,7 @@ class Training extends React.Component {
 		}
 		else
 			return (
-				<div style={{ paddingTop: '80px', height: window.innerHeight *0.9 }}>
+				<div style={{ paddingTop: '80px', height: window.innerHeight * 0.9 }}>
 					<div style={{ width: '36%', marginLeft: '32%', textAlign: 'center', marginTop: '20px' }} className="training">
 						<div className="cell">
 							<h3>Warmup</h3>

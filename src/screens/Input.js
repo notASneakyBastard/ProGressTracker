@@ -46,7 +46,7 @@ class Input extends React.Component {
 	}
 	render() {
 		
-		if(this.props.user == undefined){
+		if(this.props.user === undefined){
 			let size = this.min(window.innerHeight * 0.6, window.innerWidth * 0.6);
 			return (
 				<div style={{ alignContent: 'center', width: size, paddingTop: '90px', marginLeft: (window.innerWidth - size) / 2 }}>
@@ -54,8 +54,12 @@ class Input extends React.Component {
 				</div>
 			);
 		}
-		if(this.props.user == null){
-			return(<p>Please <Link to='/login'>log in</Link></p>)
+		if (this.props.user === null) {
+			return (
+				<div style={{ paddingTop: '90px' }}>
+					<p style={{ fontSize: '25px' }}>Please <Link to="/login">log in</Link></p>
+				</div>
+			);
 		}
 		return (
 			<div className="input">

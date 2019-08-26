@@ -133,8 +133,12 @@ class Home extends React.Component {
 			);
 		}
 		else if (user === null) {
-			return <p>Please <Link to="/login">log in</Link></p>
-		} else if(empty){
+			return (
+				<div style={{ paddingTop: '90px' }}>
+					<p style={{ fontSize: '25px' }}>Please <Link to="/login">log in</Link></p>
+				</div>
+			);
+		} else if (empty) {
 			return <p>You don't have any trainings yet. Add them in <Link to="/input">Add</Link> tab.</p>
 		}
 		return (
