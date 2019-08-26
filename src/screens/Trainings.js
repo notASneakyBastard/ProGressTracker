@@ -62,7 +62,7 @@ class Trainings extends React.Component {
 				<div>
 					<Link to={"/trainings/" + item.timestamp}>
 						<h3>{date.getDate() + '. ' + date.getMonth() + '. ' + date.getFullYear() + '.'}</h3>
-						<p>Total: {item.total} m</p>
+						<p>Total: <b>{item.total}</b> m</p>
 					</Link>
 				</div>
 			</li>

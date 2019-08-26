@@ -79,31 +79,32 @@ class Training extends React.Component {
 		}
 		else
 			return (
-				<div style={{ width: '36%', marginLeft: '32%', textAlign: 'center', marginTop: '20px' }} className="training">
-					<div className="cell">
-						<h3>Warmup</h3>
-						<ul>
-							{training.warmup.map(this.createInputField)}
-						</ul>
+				<div style={{ paddingTop: '80px', height: window.innerHeight *0.9 }}>
+					<div style={{ width: '36%', marginLeft: '32%', textAlign: 'center', marginTop: '20px' }} className="training">
+						<div className="cell">
+							<h3>Warmup</h3>
+							<ul>
+								{training.warmup.map(this.createInputField)}
+							</ul>
+						</div>
+						<hr style={{ width: '80%' }} />
+						<div className="cell main">
+							<h3>Main Part</h3>
+							<ul>
+								{training.mainpart.map(this.createInputField)}
+							</ul>
+						</div>
+						<hr style={{ width: '80%' }} />
+						<div className="cell">
+							<h3>Cool Down</h3>
+							<ul>
+								<li>
+									<span>{training.cooldown.dist + ' m  '}</span>
+									<span>{this.filterOption(training.cooldown.option)}</span>
+								</li>
+							</ul>
+						</div>
 					</div>
-					<hr style={{ width: '80%' }} />
-					<div className="cell main">
-						<h3>Main Part</h3>
-						<ul>
-							{training.mainpart.map(this.createInputField)}
-						</ul>
-					</div>
-					<hr style={{ width: '80%' }} />
-					<div className="cell">
-						<h3>Cool Down</h3>
-						<ul>
-							<li>
-								<span>{training.cooldown.dist + ' m  '}</span>
-								<span>{this.filterOption(training.cooldown.option)}</span>
-							</li>
-						</ul>
-					</div>
-
 				</div>
 			);
 	}
