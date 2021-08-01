@@ -1,6 +1,6 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Select } from './Components';
+import React from 'react'
+import { connect } from 'react-redux'
+import { Select } from './Components'
 import {
 	changeType,
 	changeDistance,
@@ -13,7 +13,7 @@ import {
 	deleteComboExcercise,
 	changeMultiplierCombo,
 	changeExcerciseMulti,
-} from '../redux/actions';
+} from '../redux/actions'
 
 class Mainpart extends React.Component {
 	constructor(props) {

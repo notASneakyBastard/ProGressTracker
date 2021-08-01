@@ -1,8 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Select } from './Components';
-import { changeType, changeDistance, addExcercise, deleteExcercise } from '../redux/actions';
-import { throwStatement } from '@babel/types';
+import React from 'react'
+import { connect } from 'react-redux'
+import { Select } from './Components'
+import { changeType, changeDistance, addExcercise, deleteExcercise } from '../redux/actions'
+
 
 class Warmup extends React.Component {
 	constructor(props) {
@@ -16,14 +16,10 @@ class Warmup extends React.Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.handleNum = this.handleNum.bind(this)
 	}
-	handleChange(event) {
-		console.log(event.target.value);
-		console.log(event.target.name);
+	handleChange(event: React.ChangeEvent<HTMLInputElement>) {
 		this.props.changeType(event.target.name, 0, event.target.value);
 	}
-	handleNum(event) {
-		console.log(event.target.value);
-		console.log(event.target.name);
+	handleNum(event: React.ChangeEvent<HTMLSelectElement>) {
 		this.props.changeDistance(event.target.name, 0, event.target.value);
 	}
 	addField() {

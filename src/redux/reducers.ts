@@ -22,31 +22,31 @@ import {
 	CHANGE_DATE,
 	ADD_TRAININGS,
 	ADD_LOGS,
-} from './types';
+} from './types'
 import { combineReducers } from 'redux'
 
 const warmup = (state = [{ key: 0, dist: 0, option: 'sprint' }], action) => {
-	let newState = [ ...state ];
+	let newState = [ ...state ]
 	switch (action.type) {
 		case CHANGE_TYPEW:
 			newState[action.id].option = action.option;
-			return newState;
+			return newState
 		case CHANGE_DISTANCEW:
 			newState[action.id].dist = parseInt(action.dist);
-			return newState;
+			return newState
 		case ADD_EXCERCISEW:
 			newState.push({ key: state.length, dist: 0, option: 'sprint' });
-			return newState;
+			return newState
 		case DELETE_EXCERCISEW:
 			newState.splice(action.id, 1);
 			for (var i = action.id; i < newState.length; i++) {
-				newState[i].key--;
+				newState[i].key--
 			}
-			return newState;
+			return newState
 		case RESET:
-			return [];
+			return []
 		default:
-			return state;
+			return state
 	}
 }
 
